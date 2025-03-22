@@ -2,7 +2,7 @@
  * Service for API calls to the backend
  */
 class ApiService {
-    constructor(baseUrl = 'http://localhost:8080') {
+    constructor(baseUrl = 'https://meter-jar-bras-stat.trycloudflare.com') {
       this.baseUrl = baseUrl;
       this.apiPath = '/api/quiz';
     }
