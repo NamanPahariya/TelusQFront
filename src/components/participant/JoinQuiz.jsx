@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useQuiz } from '../../context/QuizContext';
 import LoadingSpinner from '../common/LoadingSpinner';
 import ErrorMessage from '../common/ErrorMessage';
@@ -10,10 +10,15 @@ import { DEFAULT_TEXT } from '../../utils/constants';
  */
 const JoinQuiz = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { joinQuiz, loading, error } = useQuiz();
   
+  // Parse URL query parameters
+  const queryParams = new URLSearchParams(location.search);
+  const sessionCodeFromURL = queryParams.get('sessionCode');
+  
   const [name, setName] = useState('');
-  const [sessionCode, setSessionCode] = useState('');
+  const [sessionCode, setSessionCode] = useState(sessionCodeFromURL || '');
   const [formError, setFormError] = useState('');
 
   // Handle form submission
@@ -80,24 +85,26 @@ const JoinQuiz = () => {
             />
           </div>
           
-          {/* Session code input */}
-          <div>
-            <label 
-              htmlFor="sessionCode" 
-              className="block text-sm font-medium text-gray-700 mb-1"
-            >
-              Session Code
-            </label>
-            <input
-              id="sessionCode"
-              type="text"
-              value={sessionCode}
-              onChange={(e) => setSessionCode(e.target.value)}
-              className="w-full px-3 py-2 border text-black bg-white border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-              placeholder="Enter 6-digit code"
-              required
-            />
-          </div>
+          {/* Session code input - only show if not provided in URL */}
+          {!sessionCodeFromURL && (
+            <div>
+              <label 
+                htmlFor="sessionCode" 
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
+                Session Code
+              </label>
+              <input
+                id="sessionCode"
+                type="text"
+                value={sessionCode}
+                onChange={(e) => setSessionCode(e.target.value)}
+                className="w-full px-3 py-2 border text-black bg-white border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                placeholder="Enter 6-digit code"
+                required
+              />
+            </div>
+          )}
           
           {/* Submit button */}
           <button

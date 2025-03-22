@@ -6,6 +6,7 @@ import LoadingSpinner from '../common/LoadingSpinner';
 import ErrorMessage from '../common/ErrorMessage';
 import { QUIZ_STATES } from '../../utils/constants';
 import { formatTime } from '../../utils/helpers';
+import { QRCodeSVG } from 'qrcode.react'
 
 /**
  * Component for quiz management by the host
@@ -126,6 +127,18 @@ const ManageQuiz = () => {
               {copied && (
                 <span className="ml-2 text-xs text-green-600">Copied!</span>
               )}
+            </div>
+            
+            {/* QR Code for easy joining */}
+            <div className="mt-2">
+              <p className="text-sm text-gray-500 mb-2">Scan to join:</p>
+              <QRCodeSVG
+                value={`http://localhost:5173/join?sessionCode=${sessionCode}`} 
+                size={120}
+                level="H"
+                includeMargin={true}
+                className="border border-gray-200 rounded"
+              />
             </div>
           </div>
           <button
