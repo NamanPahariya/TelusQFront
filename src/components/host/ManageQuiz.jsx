@@ -134,7 +134,7 @@ const ManageQuiz = () => {
             <div className="mt-2">
               <p className="text-sm text-gray-500 mb-2">Scan to join:</p>
               <QRCodeSVG
-                value={`http://localhost:5173/join?sessionCode=${sessionCode}`} 
+                value={`https://telusq-front.vercel.app/join?sessionCode=${sessionCode}`} 
                 size={120}
                 level="H"
                 includeMargin={true}
