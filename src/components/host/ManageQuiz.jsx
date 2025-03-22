@@ -6,6 +6,7 @@ import LoadingSpinner from '../common/LoadingSpinner';
 import ErrorMessage from '../common/ErrorMessage';
 import { QUIZ_STATES } from '../../utils/constants';
 import { formatTime } from '../../utils/helpers';
+
 import { QRCodeSVG } from 'qrcode.react'
 
 /**
